@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimaRoupa – Vista-se para o Clima</title>
+  <meta name="description" content="Vestuário ideal para o clima da sua cidade. Compre na Shopee!" />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="https://img.icons8.com/fluency/96/partly-cloudy-day.png" />
+  <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/96/partly-cloudy-day.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── TOPO: logo + tagline ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <<!-- Usando uma imagem própria -->
+<span class="logo-mark">
+  <img src="./img/Black White Minimal Simple  Modern Art Museum Letter Logo.png" alt="Logo" width="28" height="28" />
+</span>
+        <div>
+          <h1>ClimaRoupa</h1>
+          <p>moda inteligente para cada clima</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO: busca ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h2 class="hero-title">
+        Como está o clima<br />
+        <span>na sua cidade?</span>
+      </h2>
+      <p class="hero-sub">Digite a cidade ou use o GPS e descubra o look ideal para hoje.</p>
+
+      <div class="search-box">
+        <div class="input-wrap">
+          <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="text"
+            id="city-input"
+            placeholder="Ex: Recife, BR"
+            autocomplete="off"
+          />
+        </div>
+        <div class="search-btns">
+          <button id="search-btn" onclick="searchByCity()">Buscar</button>
+          <button id="geo-btn" class="btn-outline" onclick="searchByGeo()" title="Usar minha localização">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+              <circle cx="12" cy="12" r="9" stroke-dasharray="4 2"/>
+            </svg>
+            GPS
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensagem de erro -->
+      <div id="error-box" class="error-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="error-msg">Erro ao buscar dados.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LOADING ── -->
+  <div id="loading" class="loading-wrap">
+    <div class="dots">
+      <span></span><span></span><span></span>
+    </div>
+    <p>Consultando o clima...</p>
+  </div>
+
+  <!-- ── RESULTADO ── -->
+  <main id="weather-section">
+
+    <!-- Card do clima -->
+    <div class="weather-panel">
+      <div class="weather-left">
+        <div class="w-emoji" id="w-icon">—</div>
+        <div>
+          <h3 id="w-city">—</h3>
+          <span class="w-country" id="w-country">—</span>
+        </div>
+      </div>
+      <div class="weather-right">
+        <div class="big-temp"><span id="w-temp">—</span>°C</div>
+        <div class="w-desc" id="w-desc">—</div>
+        <div class="feels">Sensação <strong id="w-feels">—</strong>°C</div>
+      </div>
+      <div class="weather-stats">
+        <div class="stat">
+          <span class="stat-ico">💧</span>
+          <strong id="w-humid">—</strong>
+          <span>Umidade</span>
+        </div>
+        <div class="stat">
+          <span class="stat-ico">💨</span>
+          <strong id="w-wind">—</strong>
+          <span>km/h</span>
+        </div>
+        <div class="stat">
+          <span class="stat-ico">☁️</span>
+          <strong id="w-clouds">—</strong>
+          <span>Nuvens %</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Faixa: perfil climático -->
+    <div class="climate-strip" id="climate-strip">
+      <span id="climate-badge">—</span>
+    </div>
+
+    <!-- Duas colunas: Look + Roupas -->
+    <div class="outfit-row">
+
+      <!-- Imagem do look -->
+      <div class="outfit-img-card">
+        <img id="outfit-img" src="" alt="Sugestão de look" />
+        <div class="img-overlay">
+          <span id="outfit-img-label">—</span>
+        </div>
+      </div>
+
+      <!-- Dica + Grid de peças -->
+      <div class="outfit-info">
+        <p class="clothes-tip" id="clothes-tip">—</p>
+        <div class="clothes-grid" id="clothes-grid"></div>
+      </div>
+
+    </div>
+
+    <!-- Seção Shopee -->
+    <div class="shopee-section">
+      <div class="shopee-header">
+        <img src="https://img.icons8.com/color/40/shopee.png" alt="Shopee" />
+        <div>
+          <h3>Compre agora na Shopee</h3>
+          <p>As melhores ofertas para o seu clima de hoje</p>
+        </div>
+      </div>
+      <div class="shopee-grid" id="shopee-links"></div>
+      <a href="https://shopee.com.br/search?keyword=moda+roupas" target="_blank" rel="noopener noreferrer" class="shopee-all-btn">
+        Ver toda a Moda na Shopee →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    ClimaRoupa © 2025 &nbsp;·&nbsp; Clima: <strong>OpenWeatherMap</strong> &nbsp;·&nbsp; Compras: <strong>Shopee BR</strong>
+  </footer>
+
+  <!-- ── BANNER PWA (aparece automaticamente quando o Chrome detecta que o app pode ser instalado) ── -->
+  <div id="install-banner" class="hidden">
+    <span>📲</span>
+    <div class="install-text">
+      <strong>Instalar ClimaRoupa</strong>
+      <span>Adicionar à tela inicial</span>
+    </div>
+    <button id="install-btn" onclick="installPWA()">Instalar</button>
+    <button id="dismiss-install" onclick="document.getElementById('install-banner').classList.add('hidden')">✕</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

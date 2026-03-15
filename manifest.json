@@ -1,0 +1,25 @@
+{
+  "name": "ClimaRoupa – Vista-se para o Clima",
+  "short_name": "ClimaRoupa",
+  "description": "Vestuário ideal para o clima da sua cidade. Compre na Shopee!",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#58a6ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./img/log.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/log.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["weather", "shopping", "lifestyle"],
+  "lang": "pt-BR"
+}
